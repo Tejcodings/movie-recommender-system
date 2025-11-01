@@ -3,6 +3,7 @@ import pandas as pd
 import pickle
 import requests
 from io import BytesIO
+import gdown
 
 def recommend(movie):
     movie_index = movies_df[movies_df['title'] == movie].index[0]
@@ -39,9 +40,12 @@ movies_dict = pickle.load(open('movies.pkl','rb'))
 movies_df = pd.DataFrame(movies_dict)
 
 #similarity = pickle.load(open('similarity.pkl','rb'))
-url = "https://drive.google.com/uc?export=download&id=1S8RZvEdr-o8ricLDUsCcTpFYtvNXtOTY"
-response = requests.get(url)
-similarity = pickle.load(BytesIO(response.content))
+url = "https://drive.google.com/uc?id=1S8RZvEdr-o8ricLDUsCcTpFYtvNXtOTY"
+output = "similarity.pkl"
+gdown.download(url, output, quiet=False)
+
+with open("similarity.pkl", "rb") as f:
+    similarity = pickle.load(f)
 
 
 
