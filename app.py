@@ -37,7 +37,11 @@ def fetch_poster(movie_id):
 movies_dict = pickle.load(open('movies.pkl','rb'))
 movies_df = pd.DataFrame(movies_dict)
 
-similarity = pickle.load(open('similarity.pkl','rb'))
+#similarity = pickle.load(open('similarity.pkl','rb'))
+url = "https://drive.google.com/uc?export=download&id=1S8RZvEdr-o8ricLDUsCcTpFYtvNXtOTY"
+response = requests.get(url)
+similarity = pickle.load(response.content)
+
 
 
 st.title('Movie Recommender System')
